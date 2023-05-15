@@ -18,6 +18,7 @@
 	},
 	"homepage": "https://github.com/BTaylors/Juicebox#readme",
 	"dependencies": {
+		"morgan": "^1.10.0",
 		"pg": "^8.10.0"
 	},
 	"devDependencies": {

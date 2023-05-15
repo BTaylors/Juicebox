@@ -6,10 +6,8 @@ const client = new Client("postgres://localhost:5432/juicebox-dev");
 async function getAllUsers() {
 	const { rows } = await client.query(
 		`SELECT id, username 
-    FROM users;
-  `
+    FROM users`
 	);
-
 	return rows;
 }
 
@@ -30,7 +28,9 @@ async function createUser({ username, password, name, location }) {
 async function updateUser(id, fields = {}) {
 	// build the set string
 	const setString = Object.keys(fields)
-		.map((key, index) => `"${key}"=$${index + 1}`)
+		.map((key, index) => {
+			return `${key}=$${index + 1}`;
+		})
 		.join(", ");
 
 	// return early if this is called without fields
@@ -42,10 +42,11 @@ async function updateUser(id, fields = {}) {
 		const result = await client.query(
 			`
       UPDATE users
-      SET "name"='new name', "location"='new location',
-      WHERE id=2;
-      RETURNING *;
+      SET ${setString}
+      WHERE id=$${Object.keys(fields).length + 1}
+      RETURNING *
     `,
+
 			[...Object.values(fields), id]
 		);
 
@@ -58,7 +59,7 @@ async function updateUser(id, fields = {}) {
 // and export them
 module.exports = {
 	client,
-	createUser,
 	getAllUsers,
+	createUser,
 	updateUser,
 };

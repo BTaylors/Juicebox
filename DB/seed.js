@@ -3,11 +3,7 @@ const { client, getAllUsers, createUser, updateUser } = require("./index");
 async function dropTables() {
 	try {
 		console.log("Starting to drop tables...");
-
-		await client.query(`
-      DROP TABLE IF EXISTS users;
-    `);
-
+		await client.query("DROP TABLE IF EXISTS users");
 		console.log("Finished dropping tables!");
 	} catch (error) {
 		console.error("Error dropping tables!");
