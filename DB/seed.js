@@ -13,7 +13,10 @@ const {
 async function dropTables() {
 	try {
 		console.log("Starting to drop tables...");
-		await client.query(`DROP TABLE IF EXISTS posts;
+		await client.query(`
+		DROP TABLE IF EXISTS post_tags;
+		DROP TABLE IF EXISTS tags;
+		DROP TABLE IF EXISTS posts;
 		DROP TABLE  IF EXISTS users;`);
 		console.log("Finished dropping tables!");
 	} catch (error) {
@@ -119,6 +122,7 @@ async function rebuildDB() {
 		await createTables();
 		await createInitialUsers();
 		await createInitialPosts();
+		await createTags();
 	} catch (error) {
 		console.log("Error rebuilding DB");
 		throw error;
