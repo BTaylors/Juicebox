@@ -5,7 +5,9 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"seed:dev": "nodemon ./DB/seed.js"
+		"seed:dev": "nodemon ./DB/seed.js",
+		"start": "node DB/index.js",
+		"start:dev": "nodemon DB/index.js"
 	},
 	"repository": {
 		"type": "git",
@@ -18,6 +20,7 @@
 	},
 	"homepage": "https://github.com/BTaylors/Juicebox#readme",
 	"dependencies": {
+		"express": "^4.18.2",
 		"morgan": "^1.10.0",
 		"pg": "^8.10.0"
 	},

@@ -2,10 +2,19 @@ const { Client } = require("pg"); // imports the pg module
 
 const client = new Client("postgres://localhost:5432/juicebox-dev");
 
+const PORT = 3000;
+const express = require("express");
+const server = express();
+const apiRouter = require("./api");
+server.use("/api", apiRouter);
+
+server.listen(PORT, () => {
+	console.log("The server is up on port", PORT);
+});
+
 /**
  * USER Methods
  */
-
 async function createUser({ username, password, name, location }) {
 	try {
 		const {
@@ -354,6 +363,9 @@ async function getAllTags() {
 	}
 }
 
+// stuff above here
+
+// stuff below here
 module.exports = {
 	client,
 	createUser,
