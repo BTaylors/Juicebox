@@ -2,7 +2,7 @@ const { Client } = require("pg"); // imports the pg module
 
 const client = new Client("postgres://localhost:5432/juicebox-dev");
 
-const PORT = 3000;
+const PORT = 5432;
 const express = require("express");
 const server = express();
 const apiRouter = require("./api");
