@@ -1,6 +1,6 @@
 const express = require("express");
 const postsRouter = express.Router();
-const { getAllPosts, createPost, getPostById } = require("../db");
+const { getAllPosts, createPost, getPostById, updatePost } = require("../db");
 const { requireUser } = require("./utils");
 
 postsRouter.use((req, res, next) => {
