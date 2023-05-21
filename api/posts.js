@@ -30,10 +30,10 @@ postsRouter.post("/", requireUser, async (req, res, next) => {
 		postData.title = title;
 		postData.authorId = req.user.id;
 		postData.content = content;
-		console.log("XXXXXXXXXXXpostdata is: ", postData);
+		console.log("Post data is: ", postData);
 
 		const post = await createPost(postData);
-		console.log("THIS IS OUR POST: ", post);
+		console.log("my post: ", post);
 
 		if (post) {
 			res.send({ post });
