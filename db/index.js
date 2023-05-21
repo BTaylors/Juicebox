@@ -1,5 +1,5 @@
 const { Client } = require("pg"); // imports the pg module
-
+require("dotenv").config();
 const client = new Client("postgres://localhost:5432/juicebox-dev");
 
 const PORT = 5432;
@@ -363,6 +363,24 @@ async function getAllTags() {
 	}
 }
 
+async function getUserByUsername(username) {
+	try {
+		const {
+			rows: [user],
+		} = await client.query(
+			`
+      SELECT *
+      FROM users
+      WHERE username=$1;
+    `,
+			[username]
+		);
+
+		return user;
+	} catch (error) {
+		throw error;
+	}
+}
 // stuff above here
 
 // stuff below here
@@ -381,4 +399,5 @@ module.exports = {
 	getAllTags,
 	createPostTag,
 	addTagsToPost,
+	getUserByUsername,
 };
